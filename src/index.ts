@@ -1,4 +1,4 @@
-import { Application, Loader, Texture, AnimatedSprite } from "pixi.js";
+import { Application, Loader, Texture, AnimatedSprite } from "pixi.js-legacy";
 import { getSpine } from "./spine-example";
 import { getLayersExample } from "./layers-example";
 import "./style.css";

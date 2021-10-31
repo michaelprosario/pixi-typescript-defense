@@ -1,4 +1,4 @@
-import { Loader } from "pixi.js";
+import { Loader } from "pixi.js-legacy";
 import { Spine } from "pixi-spine";
 import { SkeletonData } from "@pixi-spine/runtime-4.0";
 

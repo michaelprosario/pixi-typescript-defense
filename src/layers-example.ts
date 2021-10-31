@@ -4,7 +4,7 @@
 // because of that adding ts-check for now
 
 import { Group, Stage, Layer } from "@pixi/layers";
-import { Application, Container, filters, Graphics, Sprite, Texture } from "pixi.js";
+import { Application, Container, filters, Graphics, Sprite, Texture } from "pixi.js-legacy";
 
 export function getLayersExample(app: Application): Stage {
     const stage = new Stage();
