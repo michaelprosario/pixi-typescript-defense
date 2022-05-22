@@ -12,10 +12,12 @@ module.exports = (env) => {
     const devConfig = {
         mode: env.mode,
 
+
         devtool: "inline-source-map",
 
         devServer: {
             open: true,
+            allowedHosts: "all",
         },
 
         module: {
