@@ -21,19 +21,9 @@ window.onload = async (): Promise<void> => {
 
     document.body.appendChild(app.view);
 
-    getLayersExample(app);
-
     resizeCanvas();
 
-    const birdFromSprite = getBird();
-    birdFromSprite.anchor.set(0.5, 0.5);
-    birdFromSprite.position.set(gameWidth / 2, 530);
 
-    const spineExample = getSpine();
-    spineExample.position.y = 580;
-
-    app.stage.addChild(birdFromSprite);
-    app.stage.addChild(spineExample);
     app.stage.interactive = true;
 };
 
