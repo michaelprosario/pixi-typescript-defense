@@ -5,4 +5,8 @@ export enum GameGridCellContent {
 
 export class GameGridCell {
     content: GameGridCellContent;
+
+    constructor() {
+        this.content = GameGridCellContent.Empty;
+    }
 }
