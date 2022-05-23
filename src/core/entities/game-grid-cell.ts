@@ -5,8 +5,10 @@ export enum GameGridCellContent {
 
 export class GameGridCell {
     content: GameGridCellContent;
+    explored: boolean;
 
     constructor() {
         this.content = GameGridCellContent.Empty;
+        this.explored = false;
     }
 }

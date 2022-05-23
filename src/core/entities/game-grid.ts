@@ -54,8 +54,7 @@ export class GameGrid {
         let col = 0;
         let row = 0;
 
-
-
+        let content = "";
         for (row = 0; row < this.height; row++) {
             let line = "";
             for (col = 0; col < this.width; col++) {
@@ -65,11 +64,11 @@ export class GameGrid {
                     line += "*";
                 }
             }
-            console.log(line);
+
+            content += line + "\n";
         }
 
-
-
+        console.log(content);
     }
 
 
