@@ -1,11 +1,23 @@
 import { Guard } from "../services/guard";
 import { GameGridCell, GameGridCellContent } from "./game-grid-cell";
+import { Point2D } from "./point";
 
 export class GameGrid {
 
     grid: any[];
     width: number;
     height: number;
+
+    resetExploreFlags() {
+        let col: number = 0;
+        let row: number = 0;
+        for (col = 0; col < this.width; col++) {
+            for (row = 0; row < this.height; row++) {
+                let cell = this.grid[col][row] as GameGridCell;
+                cell.explored = false;
+            }
+        }
+    }
 
     constructor(width: number, height: number) {
         if (width < 10) {
@@ -28,7 +40,7 @@ export class GameGrid {
 
         for (col = 0; col < width; col++) {
             for (row = 0; row < height; row++) {
-                this.grid[col][row] = new GameGridCell();
+                this.grid[col][row] = new GameGridCell(col, row);
             }
         }
 
@@ -48,6 +60,67 @@ export class GameGrid {
         }
 
         this.grid[col][row] = content;
+    }
+
+    isValidCell(cell: Point2D) {
+        if (cell.x < 0)
+            return false;
+        if (cell.y < 0)
+            return false;
+        if (cell.x > this.width - 1)
+            return false;
+        if (cell.y > this.height - 1)
+            return false;
+
+        return true;
+    }
+
+    getCellFromPoint(point: Point2D): GameGridCell {
+        console.log(point);
+        return this.grid[point.x][point.y];
+    }
+
+    getAdjacentCells(col: number, row: number) {
+
+        let rightCell = new Point2D(col + 1, row);
+        let leftCell = new Point2D(col - 1, row);
+        let upCell = new Point2D(col, row - 1);
+        let downCell = new Point2D(col, row + 1);
+
+        let response = new Array<GameGridCell>()
+        // right - if cell is valid and empty ... return adjacent cell
+        if (this.isValidCell(rightCell)) {
+            let cell = this.getCellFromPoint(rightCell);
+            if (cell.content == GameGridCellContent.Empty) {
+                response.push(cell);
+            }
+        }
+
+        // left - if cell is valid and empty ... return adjacent cell
+        if (this.isValidCell(leftCell)) {
+            let cell = this.getCellFromPoint(leftCell);
+            if (cell.content == GameGridCellContent.Empty) {
+                response.push(cell);
+            }
+        }
+
+        // up - if cell is valid and empty ... return adjacent cell
+        if (this.isValidCell(upCell)) {
+            let cell = this.getCellFromPoint(upCell);
+            if (cell.content == GameGridCellContent.Empty) {
+                response.push(cell);
+            }
+        }
+
+        // down - if cell is valid and empty ... return adjacent cell
+        if (this.isValidCell(downCell)) {
+            let cell = this.getCellFromPoint(downCell);
+            if (cell.content == GameGridCellContent.Empty) {
+                response.push(cell);
+            }
+        }
+
+        return response;
     }
 
     printOut() {

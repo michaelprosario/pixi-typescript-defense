@@ -26,6 +26,35 @@ test("GameGrid__setContent__testValidInputs", () => {
 test("GameGrid__printOut", () => {
     // arrange
     let gameGrid = new GameGrid(30, 20);
+    createTestGrid(gameGrid);
+
+    // act
+    gameGrid.printOut();
+});
+
+test("GameGrid__getAdjacentCells__UpperLeftCell", () => {
+    let gameGrid = new GameGrid(30, 20);
+    createTestGrid(gameGrid);
+    let response = gameGrid.getAdjacentCells(0, 0);
+    expect(response.length).toBe(2);
+});
+
+test("GameGrid__getAdjacentCells__LowerRightCell", () => {
+    let gameGrid = new GameGrid(30, 20);
+    createTestGrid(gameGrid);
+    let response = gameGrid.getAdjacentCells(29, 19);
+    expect(response.length).toBe(1);
+});
+
+test("GameGrid__getAdjacentCells__UpperRightCell", () => {
+    let gameGrid = new GameGrid(30, 20);
+    createTestGrid(gameGrid);
+    let response = gameGrid.getAdjacentCells(29, 0);
+    expect(response.length).toBe(2);
+});
+
+
+function createTestGrid(gameGrid: GameGrid) {
     for (let i = 0; i < 18; i++) {
         gameGrid.setGridCell(5, i, GameGridCellContent.Wall);
         gameGrid.setGridCell(15, i, GameGridCellContent.Wall);
@@ -37,9 +66,55 @@ test("GameGrid__printOut", () => {
         gameGrid.setGridCell(18, i, GameGridCellContent.Wall);
         gameGrid.setGridCell(28, i, GameGridCellContent.Wall);
     }
+}
+/*
+
+given
+- upper left cell
+when
+- get adjacent cells
+
+then
+- return cell to the right
+- return cell below
+
+===
 
 
-    // act
-    gameGrid.printOut();
-});
+given
+- lower right cell
+when
+- get adjacent cells
 
+then
+- return cell to the left
+- return cell upper
+
+===
+
+
+given
+- cell 2 2
+when
+- get adjacent cells
+
+then
+- return cell to top
+- return cell to bottom
+- return cell to left
+- return cell to right
+
+===
+
+given
+- cell 4 4
+when
+- get adjacent cells
+
+then
+- return cell to top
+- return cell to left
+- return cell to right
+
+
+*/
