@@ -15,6 +15,7 @@ export class GameGrid {
             for (row = 0; row < this.height; row++) {
                 let cell = this.grid[col][row] as GameGridCell;
                 cell.explored = false;
+                cell.parentCell = undefined;
             }
         }
     }
@@ -80,7 +81,7 @@ export class GameGrid {
         return this.grid[point.x][point.y];
     }
 
-    getAdjacentCells(col: number, row: number) {
+    getAdjacentCells(col: number, row: number): GameGridCell[] {
 
         let rightCell = new Point2D(col + 1, row);
         let leftCell = new Point2D(col - 1, row);

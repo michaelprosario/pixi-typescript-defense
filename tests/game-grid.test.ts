@@ -74,7 +74,6 @@ test("GameGrid__getAdjacentCells__CellTwoTwo", () => {
     expect(response.length).toBe(3);
 });
 
-
 function createTestGrid(gameGrid: GameGrid) {
     for (let i = 0; i < 18; i++) {
         gameGrid.setGridCell(5, i, GameGridCellContent.Wall);
@@ -88,17 +87,3 @@ function createTestGrid(gameGrid: GameGrid) {
         gameGrid.setGridCell(28, i, GameGridCellContent.Wall);
     }
 }
-/*
-
-given
-- cell 4 4
-when
-- get adjacent cells
-
-then
-- return cell to top
-- return cell to left
-- return cell to right
-
-
-*/
