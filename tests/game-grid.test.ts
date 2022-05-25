@@ -53,6 +53,27 @@ test("GameGrid__getAdjacentCells__UpperRightCell", () => {
     expect(response.length).toBe(2);
 });
 
+test("GameGrid__getAdjacentCells__UpperRightCell", () => {
+    let gameGrid = new GameGrid(30, 20);
+    createTestGrid(gameGrid);
+    let response = gameGrid.getAdjacentCells(29, 0);
+    expect(response.length).toBe(2);
+});
+
+test("GameGrid__getAdjacentCells__CellTwoTwo", () => {
+    let gameGrid = new GameGrid(30, 20);
+    createTestGrid(gameGrid);
+    let response = gameGrid.getAdjacentCells(2, 2);
+    expect(response.length).toBe(4);
+});
+
+test("GameGrid__getAdjacentCells__CellTwoTwo", () => {
+    let gameGrid = new GameGrid(30, 20);
+    createTestGrid(gameGrid);
+    let response = gameGrid.getAdjacentCells(4, 4);
+    expect(response.length).toBe(3);
+});
+
 
 function createTestGrid(gameGrid: GameGrid) {
     for (let i = 0; i < 18; i++) {
@@ -68,43 +89,6 @@ function createTestGrid(gameGrid: GameGrid) {
     }
 }
 /*
-
-given
-- upper left cell
-when
-- get adjacent cells
-
-then
-- return cell to the right
-- return cell below
-
-===
-
-
-given
-- lower right cell
-when
-- get adjacent cells
-
-then
-- return cell to the left
-- return cell upper
-
-===
-
-
-given
-- cell 2 2
-when
-- get adjacent cells
-
-then
-- return cell to top
-- return cell to bottom
-- return cell to left
-- return cell to right
-
-===
 
 given
 - cell 4 4
