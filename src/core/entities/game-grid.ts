@@ -1,3 +1,4 @@
+import { Ensure } from "../services/ensure";
 import { Guard } from "../services/guard";
 import { GameGridCell, GameGridCellContent } from "./game-grid-cell";
 import { Point2D } from "./point";
@@ -80,7 +81,11 @@ export class GameGrid {
     }
 
     getCellFromPoint(point: Point2D): GameGridCell {
-        console.log(point);
+        Ensure.objectNotNull(point, "point is required");
+        
+        if (!this.grid[point.x][point.y]) {
+            throw `getCellFromPoint > cell not defined ${point.x}/${point.y}`;
+        }
         return this.grid[point.x][point.y];
     }
 

@@ -8,7 +8,6 @@ test("GameGrid setup", () => {
     // act
     let gameGrid = new GameGrid(30, 20);
 
-
     // assert
     expect(gameGrid.width).toBe(30);
     expect(gameGrid.height).toBe(20);
@@ -76,16 +75,19 @@ test("GameGrid__getAdjacentCells__CellTwoTwo", () => {
     expect(response.length).toBe(3);
 });
 
-test("BreadthFirstSearchService", () => {
+test("BreadthFirstSearchService__execute__doValidInputs", () => {
     let gameGrid = new GameGrid(30, 20);
     createTestGrid(gameGrid);
 
     let service = new BreadthFirstSearchService();
+
     let start = new Point2D(0, 0);
-    let end = new Point2D(0, 0);
-    service.execute(gameGrid, start, end);
+    let end = new Point2D(29, 19);
 
+    let response = service.execute(gameGrid, start, end);
 
+    expect(response).toBeDefined();
+    expect(response.length).toBeGreaterThan(0);
 });
 
 function createTestGrid(gameGrid: GameGrid) {
