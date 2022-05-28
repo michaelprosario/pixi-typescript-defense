@@ -1,5 +1,7 @@
 import { GameGrid } from "../src/core/entities/game-grid";
 import { GameGridCellContent } from "../src/core/entities/game-grid-cell";
+import { Point2D } from "../src/core/entities/point";
+import { BreadthFirstSearchService } from "../src/core/services/breadth-first-search-service";
 
 test("GameGrid setup", () => {
     // arrange
@@ -20,7 +22,7 @@ test("GameGrid__setContent__testValidInputs", () => {
     gameGrid.setGridCell(10, 5, GameGridCellContent.Wall);
 
     // assert
-    expect(gameGrid.grid[10][5]).toBe(GameGridCellContent.Wall);
+    expect(gameGrid.grid[10][5].content).toBe(GameGridCellContent.Wall);
 });
 
 test("GameGrid__printOut", () => {
@@ -74,6 +76,18 @@ test("GameGrid__getAdjacentCells__CellTwoTwo", () => {
     expect(response.length).toBe(3);
 });
 
+test("BreadthFirstSearchService", () => {
+    let gameGrid = new GameGrid(30, 20);
+    createTestGrid(gameGrid);
+
+    let service = new BreadthFirstSearchService();
+    let start = new Point2D(0, 0);
+    let end = new Point2D(0, 0);
+    service.execute(gameGrid, start, end);
+
+
+});
+
 function createTestGrid(gameGrid: GameGrid) {
     for (let i = 0; i < 18; i++) {
         gameGrid.setGridCell(5, i, GameGridCellContent.Wall);
@@ -81,7 +95,7 @@ function createTestGrid(gameGrid: GameGrid) {
         gameGrid.setGridCell(25, i, GameGridCellContent.Wall);
     }
 
-    for (let i = 20; i > 2; i--) {
+    for (let i = 19; i > 2; i--) {
         gameGrid.setGridCell(8, i, GameGridCellContent.Wall);
         gameGrid.setGridCell(18, i, GameGridCellContent.Wall);
         gameGrid.setGridCell(28, i, GameGridCellContent.Wall);

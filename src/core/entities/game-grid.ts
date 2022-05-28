@@ -4,7 +4,7 @@ import { Point2D } from "./point";
 
 export class GameGrid {
 
-    grid: any[];
+    grid: GameGridCell[][];
     width: number;
     height: number;
 
@@ -13,7 +13,7 @@ export class GameGrid {
         let row: number = 0;
         for (col = 0; col < this.width; col++) {
             for (row = 0; row < this.height; row++) {
-                let cell = this.grid[col][row] as GameGridCell;
+                let cell = this.grid[col][row];
                 cell.explored = false;
                 cell.parentCell = undefined;
             }
@@ -29,38 +29,41 @@ export class GameGrid {
             throw "height is less than 10";
         }
 
-        this.grid = new Array(width);
+        this.grid = [];
         this.width = width;
         this.height = height;
 
         let col = 0;
         let row = 0;
-        for (col = 0; col < width; col++) {
-            this.grid[col] = new Array(height);
-        }
 
         for (col = 0; col < width; col++) {
+            this.grid[col] = [];
             for (row = 0; row < height; row++) {
                 this.grid[col][row] = new GameGridCell(col, row);
             }
         }
-
     }
 
     setGridCell(col: number, row: number, content: GameGridCellContent) {
         if (col < 0)
-            throw "col is negative";
+            throw "setGridCell: col is negative";
         if (col > this.width)
-            throw "col is too large"
+            throw "setGridCell: col is too large"
 
         if (row < 0)
-            throw "row is negative";
+            throw "setGridCell: row is negative";
 
         if (row > this.height) {
-            throw "row is too large"
+            throw "setGridCell: row is too large"
         }
 
-        this.grid[col][row] = content;
+        if (!this.grid[col][row]) {
+            throw `setGridCell: grid > ${col}/${row} is not defined in grid`
+
+        }
+
+
+        this.grid[col][row].content = content;
     }
 
     isValidCell(cell: Point2D) {
