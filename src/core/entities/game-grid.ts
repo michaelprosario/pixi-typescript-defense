@@ -80,9 +80,18 @@ export class GameGrid {
         return true;
     }
 
+    getCell(x: number, y: number): GameGridCell {
+        if (x < 0) throw new Error("x must be greater than or equal to 0");
+        if (y < 0) throw new Error("y must be greater than or equal to 0");
+        if (x > this.width - 1) throw new Error("x must be less than width");
+        if (y > this.height - 1) throw new Error("y must be less than height");
+
+        return this.grid[x][y];
+    }
+
     getCellFromPoint(point: Point2D): GameGridCell {
         Ensure.objectNotNull(point, "point is required");
-        
+
         if (!this.grid[point.x][point.y]) {
             throw `getCellFromPoint > cell not defined ${point.x}/${point.y}`;
         }
